@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+<body>
+    <div id="navbar">
+        <span class="homelink"><a href="/home">Home</a></span>
+        {% if session['user_id'] %}
+        <span><a href="/logout">Log Out</a></span>
+        <span>logged in as <a href="/users/{{session['user_id']}}">{{session['user_id']}}</a></span>
+        {% else %}
+        <span><a href="/login"> Log In</a></span>
+        <span><a href="/register"> Sign Up</a></span>
+        {% endif %}
+        
+    </div>
+    {% for message in get_flashed_messages() %}
+        <p style="background-color:antiquewhite;">{{message}}</p>
+    {%endfor%}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
